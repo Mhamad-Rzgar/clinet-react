@@ -80,34 +80,67 @@ export default function EmployeeList() {
                     </div>
                 </div>
             </div>
-            <div className="col-md-3">
-                <Uploader
-                    addOrEdit={addOrEdit}
-                    name="MYSQL"
-                    recordForEdit={recordForEdit}
-                />
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">MySql</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Sql Server</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Oracle</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">MS - Access</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div >
+                        <Uploader
+                            addOrEdit={addOrEdit}
+                            name="My Sql"
+                            recordForEdit={recordForEdit}
+                        />
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                    <Uploader
+                        addOrEdit={addOrEdit}
+                        name="MYSQL"
+                        recordForEdit={recordForEdit}
+                    />
+
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div >
+                        <Uploader
+                            addOrEdit={addOrEdit}
+                            name="Oracle"
+                            recordForEdit={recordForEdit}
+                        />
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="access-tab">
+                    <div >
+                        <Uploader
+                            addOrEdit={addOrEdit}
+                            name="MYSQL"
+                            recordForEdit={recordForEdit}
+                        />
+                    </div>
+                </div>
             </div>
-            <div className="col-md-3">
-                <Uploader
-                    addOrEdit={addOrEdit}
-                    name="SQL-Server"
-                    recordForEdit={recordForEdit}
-                />
-            </div>
-            <div className="col-md-3">
-                <Uploader
-                    addOrEdit={addOrEdit}
-                    name="MS - Access"
-                    recordForEdit={recordForEdit}
-                />
-            </div>
-            <div className="col-md-3">
-                <Uploader
-                    addOrEdit={addOrEdit}
-                    name="Oracle"
-                    recordForEdit={recordForEdit}
-                />
-            </div>
+
+
+
+
+
+
             <div className="col-md-12">
                 <div className="jumbotron jumbotron-fluid py-4">
                     <div className="container text-center">
@@ -143,6 +176,7 @@ export default function EmployeeList() {
                     recordForEdit={recordForEdit}
                 />
             </div>
+
             <div className="col-md-12">
                 <div className="jumbotron jumbotron-fluid py-4">
                     <div className="container text-center">
@@ -177,6 +211,10 @@ export default function EmployeeList() {
                     recordForEdit={recordForEdit}
                 />
             </div>
+
+
+
+
 
         </div>
     )
