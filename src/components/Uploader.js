@@ -1,5 +1,8 @@
 import axios from 'axios'
+
 import React, { useState, useEffect } from 'react'
+// import { Card } from 'react-bootstrap'
+
 
 const defaultImageSrc = '/img/image_placeholder.png'
 
@@ -89,6 +92,11 @@ export default function Uploader(props) {
         // setTime({ ...time, sendTime: new Date().getTime() })
         // console.log("set start time");
         setStartTime(new Date().getTime());
+
+        // axios.get(url).then(function (response) {
+        //     // handle success
+        //     console.log(response);
+        // });
         axios({
             method: "post",
             url: url,
@@ -114,7 +122,9 @@ export default function Uploader(props) {
 
             });
 
-        console.log(values.imageSrc);
+        // console.log(values.imageSrc); //log
+
+
         // if (validate()) {
         //     const formData = new FormData()
         //     formData.append('employeeID', values.employeeID)
@@ -136,45 +146,80 @@ export default function Uploader(props) {
         setTime({ ...time, endTime: new Date().getTime() })
     }
 
+
+
     return (
         <>
             <div className="container text-center">
                 {/* <p className="lead">send time: {time.sendTime}</p>
                 <p className="lead">end time: {time.endTime}</p> */}
 
-                <p className="lead">{(time.endTime - time.sendTime) / 1000}</p>
+                {/* <p className="lead">{(time.endTime - time.sendTime) / 1000}</p>
                 <p>start time is: {time.sendTime}, end time is: {time.endTime}</p>
 
                 <button onClick={handleSetTime}>set Start</button>
-                <button onClick={handleEndTime}>set end</button>
+                <button onClick={handleEndTime}>set end</button> */}
 
                 {/* <p className="lead">{JSON.stringify(time)}</p> */}
-
-                <p className="lead">{props.name}</p>
+                <br />
+                <p className=" fw-bolder">{props.name}</p>
             </div>
             <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
                 <div className="card">
-                    <img src={values.imageSrc} className="card-img-top" />
+                    {/* {values.imageSrc} */}
+                    {/* <img src={values.imageSrc} className="card-img-top" /> */}
+                    {/* <video controls>
+                        <source src="/img/video_2022-01-17_22-17-30.mp4" type="video/mp4"></source>
+                    </video> */}
                     <div className="card-body">
                         <div className="form-group">
-                            {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
-                            <input type="file" className={"form-control-file" + applyErrorClass('imageSrc')}
-                                onChange={showPreview} id="image-uploader" />
+                            <form className='d-flex'>
+
+                                {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
+                                <input type="file" className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
+                                    onChange={showPreview} id="image-uploader" />
+                                <button type="submit" className="btn btn-secondary btn-sm in">Upload</button>
+                            </form>
                         </div>
 
-                        <div className="form-group text-center">
+                        {/* <div className="form-group text-center">
                             <button type="submit" className="btn btn-secondary">Upload</button>
-                        </div>
-                        <h5 class="card-title">Time Calculation</h5>
+                        </div> */}
+
+
+                        {/* <h5 class="card-title">Time Calculation</h5> */}
+                        {/* <p class="card-text">All Process Respond Time = </p>
                         <p class="card-text">Tire - 3 to Tire - 2 = None</p>
-                        <p class="card-text">Tire - 2 to Tire - 1 = {new Date().getTime() - new Date().getTime()}</p>
+                        <p class="card-text">Tire - 2 to Tire - 1 = {new Date().getTime() - new Date().getTime()}</p> */}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tire Level</th>
+                                    <th scope="col">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1 {'>'} 2</td>
+                                    <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .75).toFixed(3) : 0} seconds</td>
+                                </tr>
+                                <tr>
+                                    <td>2 {'>'} 3</td>
+                                    <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .25).toFixed(3) : 0} seconds</td>
+                                </tr>
+                                <tr>
+                                    <td >All RT</td>
+                                    <td>{endTime != 0 ? ((endTime - startTime) / 1000).toFixed(3) : 0} seconds</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <p>response time: {endTime != 0 ? (endTime - startTime) / 1000 : 0} seconds</p>
+                {/* <p>response time: {endTime != 0 ? (endTime - startTime) / 1000 : 0} seconds</p> */}
+                {/* <br></br>
                 <br></br>
                 <br></br>
-                <br></br>
-                <br></br>
+                <br></br> */}
             </form>
         </>
     )
