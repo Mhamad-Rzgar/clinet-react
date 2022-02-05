@@ -84,25 +84,26 @@ export default function Asp() {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div className='row'>
-                            <div className='col-4'>
+                            <div className='col-6'>
                                 <Uploader
                                     name="Image"
                                 />
                             </div>
-                            <div className='col-4'>
+                            <div className='col-6'>
                                 <Uploader
                                     name="Video"
                                 />
                             </div>
-                            <div className='col-4'>
+
+                        </div>
+                        <br />
+                        <div className='row'>
+                            <div className='col-6'>
                                 <Uploader
                                     name="All Type of file"
                                 />
                             </div>
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <div className='col-12'>
+                            <div className='col-6'>
                                 <p className='text-center fw-bolder'>Simple Query</p>
                                 <div className='card queryCard' >
                                     <div class="mb-3">

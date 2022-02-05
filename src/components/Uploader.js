@@ -90,8 +90,8 @@ export default function Uploader(props) {
 
 
     const port = '35220';
-    // const url = "http://localhost:35220/api/image";
-    const url = "http://localhost:35220/api/SqlServer";
+    const url = "http://localhost:35220/api/image";
+    // const url = "http://localhost:35220/api/SqlServer";
 
     const handleFormSubmit = e => {
         e.preventDefault()
@@ -160,18 +160,6 @@ export default function Uploader(props) {
 
     return (
         <>
-            {isFilePicked ? (
-                <>
-                    <p>Filename: {selectedFile.name}</p>
-                    <p>Filetype: {selectedFile.type}</p>
-                    <p>Size in bytes: {selectedFile.size}</p>
-                </>
-            )
-                : (
-                    <p>Select a file to show details</p>
-                )
-            }
-
             <div className="container text-center">
                 {/* <p className="lead">send time: {time.sendTime}</p>
                 <p className="lead">end time: {time.endTime}</p> */}
@@ -188,12 +176,26 @@ export default function Uploader(props) {
             </div>
             <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
                 <div className="card">
+
                     {/* {values.imageSrc} */}
                     {/* <img src={values.imageSrc} className="card-img-top" /> */}
                     {/* <video controls>
                         <source src="/img/video_2022-01-17_22-17-30.mp4" type="video/mp4"></source>
                     </video> */}
                     <div className="card-body">
+                        {isFilePicked ? (
+                            <>
+                                <p>Filename: {selectedFile.name}</p>
+                                <p>Filetype: {selectedFile.type}</p>
+                                <p>Size in bytes: {selectedFile.size}</p>
+
+
+                            </>
+                        )
+                            : (
+                                <p>Select a file to show details</p>
+                            )
+                        }
                         <div className="form-group">
                             <form className='d-flex'>
 
@@ -201,7 +203,7 @@ export default function Uploader(props) {
                                 {/* <input type="file" accept='video/mp4' className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')} */}
                                 <input type="file" className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
                                     onChange={showPreview} id="image-uploader" />
-                                <button type="submit" className="btn btn-secondary btn-sm in">Upload</button>
+                                <button type="submit" className={isFilePicked ? 'btn btn-secondary btn-sm in' : 'btn btn-secondary btn-sm in disabled'} >Upload</button>
                             </form>
                         </div>
 
@@ -214,7 +216,8 @@ export default function Uploader(props) {
                         {/* <p class="card-text">All Process Respond Time = </p>
                         <p class="card-text">Tire - 3 to Tire - 2 = None</p>
                         <p class="card-text">Tire - 2 to Tire - 1 = {new Date().getTime() - new Date().getTime()}</p> */}
-                        <table class="table">
+                        <table class="table table-striped table-hover">
+                            <caption>Table of Perfonmance</caption>
                             <thead>
                                 <tr>
                                     <th scope="col">Tire Level</th>
@@ -234,8 +237,14 @@ export default function Uploader(props) {
                                     <td >All RT</td>
                                     <td>{endTime != 0 ? ((endTime - startTime) / 1000).toFixed(3) : 0} seconds</td>
                                 </tr>
+                                <tr>
+                                    <td >ThroughPut</td>
+                                    <td>{endTime != 0 ? (((endTime - startTime) / 1000) / (selectedFile.size / 1000000)).toFixed(3) : 0} MB/s</td>
+                                </tr>
                             </tbody>
                         </table>
+                        {/* <p>throughput: {endTime != 0 ? (((endTime - startTime) / 1000).toFixed(3) / (selectedFile.size / 1000000)) : 0} MB/s</p> */}
+                        {/* {isFilePicked ? selectedFile.size / 1000000 : "wait"} */}
                     </div>
                 </div>
                 {/* <p>response time: {endTime != 0 ? (endTime - startTime) / 1000 : 0} seconds</p> */}
