@@ -200,7 +200,6 @@ export default function Uploader(props) {
                                 {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
                                 {/* <input type="file" accept='video/mp4' className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')} */}
                                 <input type="file" className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
-
                                     onChange={showPreview} id="image-uploader" />
                                 <button type="submit" className="btn btn-secondary btn-sm in">Upload</button>
                             </form>
