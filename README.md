@@ -74,3 +74,15 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 Set-ExecutionPolicy Unrestricted
 
 npm install --global yarn
+
+
+----------------------------------------------------
+
+- accept only image or photo
+- make componenet Resuable
+- add some show detail if picked
+- send image name or another detail
+- retrive image name and another detail as qurey retirver.
+- add throught put bite per second
+- set throughtput in each tire
+- make it responsible crad or uploader

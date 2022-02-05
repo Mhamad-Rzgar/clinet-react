@@ -7,8 +7,6 @@ import React, { useState, useEffect } from 'react'
 const defaultImageSrc = '/img/image_placeholder.png'
 
 const initialFieldValues = {
-
-
     imageSrc: defaultImageSrc,
     imageFile: null
 }
@@ -17,6 +15,9 @@ const initialFieldValues = {
 export default function Uploader(props) {
 
     const { addOrEdit, recordForEdit } = props
+
+    const [selectedFile, setSelectedFile] = useState();
+    const [isFilePicked, setIsFilePicked] = useState(false);
 
     const [values, setValues] = useState(initialFieldValues)
     const [errors, setErrors] = useState({})
@@ -45,8 +46,14 @@ export default function Uploader(props) {
     // }
 
     const showPreview = e => {
+
+        setSelectedFile(e.target.files[0]);
+        setIsFilePicked(true);
+
         if (e.target.files && e.target.files[0]) {
             let imageFile = e.target.files[0];
+            let slaw = e.target.files[0];
+            console.log(e.target.files[2]);
             const reader = new FileReader();
             reader.onload = x => {
                 setValues({
@@ -58,6 +65,7 @@ export default function Uploader(props) {
             reader.readAsDataURL(imageFile)
         }
         else {
+            console.log(e.target.files[2]);
             setValues({
                 ...values,
                 imageFile: null,
@@ -82,13 +90,15 @@ export default function Uploader(props) {
 
 
     const port = '35220';
-    const url = "http://localhost:35220/api/image";
+    // const url = "http://localhost:35220/api/image";
+    const url = "http://localhost:35220/api/SqlServer";
 
     const handleFormSubmit = e => {
         e.preventDefault()
         setEndTime(0);
         const formData = new FormData()
         formData.append('imageData', values.imageSrc);
+        console.log();
         // setTime({ ...time, sendTime: new Date().getTime() })
         // console.log("set start time");
         setStartTime(new Date().getTime());
@@ -150,6 +160,18 @@ export default function Uploader(props) {
 
     return (
         <>
+            {isFilePicked ? (
+                <>
+                    <p>Filename: {selectedFile.name}</p>
+                    <p>Filetype: {selectedFile.type}</p>
+                    <p>Size in bytes: {selectedFile.size}</p>
+                </>
+            )
+                : (
+                    <p>Select a file to show details</p>
+                )
+            }
+
             <div className="container text-center">
                 {/* <p className="lead">send time: {time.sendTime}</p>
                 <p className="lead">end time: {time.endTime}</p> */}
@@ -176,6 +198,7 @@ export default function Uploader(props) {
                             <form className='d-flex'>
 
                                 {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
+                                {/* <input type="file" accept='video/mp4' className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')} */}
                                 <input type="file" className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
                                     onChange={showPreview} id="image-uploader" />
                                 <button type="submit" className="btn btn-secondary btn-sm in">Upload</button>
