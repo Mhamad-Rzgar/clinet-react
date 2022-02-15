@@ -3,7 +3,8 @@ import './Asp.css';
 import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Uploader from '../Uploader';
+import Uploader from '../../Uploader';
+import QueryUploader from '../../Tabs/QueryUploader/QueryUploader';
 
 
 export default function Asp() {
@@ -34,6 +35,11 @@ export default function Asp() {
                 console.log("error: " + error);
             })
     }
+
+    const mySqlUrl = "http://localhost:35220/api/image";
+    const sqlServerUrl = "http://localhost:35220/api/SqlServer";
+    const oracleUrl = "";
+    const msAccessUrl = "http://localhost:35220/api/msAccess";
 
     return (
         <>
@@ -66,7 +72,6 @@ export default function Asp() {
             <br />
             <br />
             <div className="container">
-
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">My Sql</button>
@@ -87,56 +92,31 @@ export default function Asp() {
                             <div className='col-6'>
                                 <Uploader
                                     name="Image"
+                                    url={mySqlUrl}
+                                    accept="image/*"
                                 />
                             </div>
                             <div className='col-6'>
                                 <Uploader
                                     name="Video"
+                                    url={mySqlUrl}
+                                    accept='video/*'
                                 />
                             </div>
-
                         </div>
                         <br />
                         <div className='row'>
                             <div className='col-6'>
                                 <Uploader
                                     name="All Type of file"
+                                    url={mySqlUrl}
                                 />
                             </div>
                             <div className='col-6'>
-                                <p className='text-center fw-bolder'>Simple Query</p>
-                                <div className='card queryCard' >
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Simple SQL Command - (Get latest data From Table)</label>
-                                        <textarea class="form-control form-control-lg" value="SELECT * FROM assetTable.image ORDER BY imageId DESC LIMIT 1" contentEditable="false"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <h3>The Retrived Image id is: {imageData}</h3>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Tire Level</th>
-                                                <th scope="col">Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1 {'>'} 2 React to ASP</td>
-                                                <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .75).toFixed(3) : 0} seconds</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 {'>'} 3 ASP to MySQL</td>
-                                                <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .25).toFixed(3) : 0} seconds</td>
-                                            </tr>
-                                            <tr>
-                                                <td >All Response Time</td>
-                                                <td>{endTime != 0 ? ((endTime - startTime) / 1000).toFixed(3) : 0} seconds</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <button className='btn btn-secondary' onClick={handleRunQuery}>Run Simple Qurey</button>
-                                </div>
+                                <QueryUploader
+                                    name="simple Query"
+                                    url={mySqlUrl}
+                                />
                             </div>
                         </div>
                         <br />
@@ -144,12 +124,40 @@ export default function Asp() {
                         <br />
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <br />
-                        <div className='alert alert-info'>
-                            <div className='text-center'>
-                                under construction... (~5 days)
+                        <div className='row'>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="Image"
+                                    url={sqlServerUrl}
+                                    accept="image/*"
+                                />
+                            </div>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="Video"
+                                    url={sqlServerUrl}
+                                    accept='video/*'
+                                />
                             </div>
                         </div>
+                        <br />
+                        <div className='row'>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="All Type of file"
+                                    url={sqlServerUrl}
+                                />
+                            </div>
+                            <div className='col-6'>
+                                <QueryUploader
+                                    name="simple Query"
+                                    url={sqlServerUrl}
+                                />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <br />
@@ -160,12 +168,42 @@ export default function Asp() {
                         </div>
                     </div>
                     <div class="tab-pane fade disabled" id="access" role="tabpanel" aria-labelledby="access-tab">
-                        <br />
-                        <div className='alert alert-primary'>
-                            <div className='text-center'>
-                                under construction... (~17 days)
+                        <div className='row'>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="Image"
+                                    url={msAccessUrl}
+                                    accept="image/*"
+                                />
+                            </div>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="Video"
+                                    url={msAccessUrl}
+                                    accept='video/*'
+                                />
                             </div>
                         </div>
+                        <br />
+                        <div className='row'>
+                            <div className='col-6'>
+                                <Uploader
+                                    name="All Type of file"
+                                    url={msAccessUrl}
+                                />
+                            </div>
+                            <div className='col-6'>
+                                <QueryUploader
+                                    name="simple Query"
+                                    url={msAccessUrl}
+                                />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+
+
                     </div>
                 </div>
             </div >

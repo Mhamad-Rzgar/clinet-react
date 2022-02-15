@@ -1,10 +1,7 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom';
+import Asp from './components/Pages/APS/Asp';
 import './index.css';
-import Asp from './components/APS/Asp';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 
 ReactDOM.render(
@@ -19,6 +16,7 @@ ReactDOM.render(
   //     </Route>
   //   </Switch>
   // </BrowserRouter >,
+  // <Asp />,
   <Asp />,
   document.getElementById('root')
 );

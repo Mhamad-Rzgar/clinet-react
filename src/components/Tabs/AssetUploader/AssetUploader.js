@@ -12,7 +12,7 @@ const initialFieldValues = {
 }
 
 
-export default function Uploader(props) {
+export default function AssetUploader(props) {
 
     const { addOrEdit, recordForEdit } = props
 
@@ -189,9 +189,10 @@ export default function Uploader(props) {
                         }
                         <div className="form-group">
                             <form className='d-flex'>
+
                                 {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
                                 {/* <input type="file" accept='video/mp4' className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')} */}
-                                <input type="file" accept={props.accept} className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
+                                <input type="file" className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
                                     onChange={showPreview} id="image-uploader" />
                                 <button type="submit" className={isFilePicked ? 'btn btn-secondary btn-sm in' : 'btn btn-secondary btn-sm in disabled'} >Upload</button>
                             </form>
