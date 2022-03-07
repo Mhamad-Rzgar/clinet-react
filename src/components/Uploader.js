@@ -1,8 +1,6 @@
 import axios from 'axios'
 
 import React, { useState, useEffect } from 'react'
-// import { Card } from 'react-bootstrap'
-
 
 const defaultImageSrc = '/img/image_placeholder.png'
 
@@ -11,45 +9,37 @@ const initialFieldValues = {
     imageFile: null
 }
 
-
 export default function Uploader(props) {
 
-    const { addOrEdit, recordForEdit } = props
+    // ئەمانە ئەو ڤاریابڵانەن کە درووست کراون بۆ ریفرێشکردنەوەی بەرنامەکە لەکاتی گۆڕانی نرخی پارچەکان
 
+    const { addOrEdit, recordForEdit } = props
+    //  بەرپرسە لە هەڵبژاردنی فایل و رەسم و وێنە
     const [selectedFile, setSelectedFile] = useState();
+    // بەرپرسە لەوەی بزانێت فایلێک هەڵبژێراوە یان نا
     const [isFilePicked, setIsFilePicked] = useState(false);
 
+    // بەرپرسە لەوەی بزانێ کێشە لە ئاپەکە هەیە یاخود نیە
     const [values, setValues] = useState(initialFieldValues)
     const [errors, setErrors] = useState({})
+
+    // بەرپرسە لە هەژمارکردنی کاتی گەرانەوەی وێنە و فایل و کیوری و ڤیدیۆکان
     const [time, setTime] = useState({
         sendTime: 0,
         endTime: 0,
     })
-
     const [startTime, setStartTime] = useState(0);
     const [endTime, setEndTime] = useState(0);
-
-
-
-
+    //  بەپرسە لە کردنەوەی فایلەکان
     useEffect(() => {
         if (recordForEdit != null)
             setValues(recordForEdit);
     }, [recordForEdit])
 
-    // const handleInputChange = e => {
-    //     const { name, value } = e.target;
-    //     setValues({
-    //         ...values,
-    //         [name]: value
-    //     })
-    // }
-
+    // ئەم فەنکشنە سوودی دەبێت بۆ داونلۆدکردنی ئەو فایلەی لە کیوریەکەوە بۆمان یەتەوە
     const showPreview = e => {
-
         setSelectedFile(e.target.files[0]);
         setIsFilePicked(true);
-
         if (e.target.files && e.target.files[0]) {
             let imageFile = e.target.files[0];
             let slaw = e.target.files[0];
@@ -74,89 +64,43 @@ export default function Uploader(props) {
         }
     }
 
-    // const validate = () => {
-    //     let temp = {}
-    //     temp.employeeName = values.employeeName == "" ? false : true;
-    //     temp.imageSrc = values.imageSrc == defaultImageSrc ? false : true;
-    //     setErrors(temp)
-    //     return Object.values(temp).every(x => x == true)
-    // }
-
-    // const resetForm = () => {
-    //     setValues(initialFieldValues)
-    //     document.getElementById('image-uploader').value = null;
-    //     setErrors({})
-    // }
-
-
+    // ئەو پۆڕتەی ئەی پی ئایەکە کاری لەگەڵ دەکات لەسەر کۆمپیوتەرەکە
     const port = '35220';
+    // ئەو لینکەی تیەری سێ لەڕێگەیەوە پەیوەندی بە تیەری دووەوە دەکات و رەسم و فایلەکان دەنێرێت.
     const url = "http://localhost:35220/api/image";
+
     // const url = "http://localhost:35220/api/SqlServer";
 
+    // ئەم فەنکشنە ئەوکاتە ڕەنەبی کە دەسەنێین بە ئەپڵۆد و ئەپڵۆد ئەبێت فایلەکان
     const handleFormSubmit = e => {
         e.preventDefault()
+        // هەژماری کاتی ناردن لێرەوە دەکەین
         setEndTime(0);
         const formData = new FormData()
+        // لە فایلی فۆڕمێکدا بەیس ٦٤ ی رەسمەکە یاخود ڤیدیۆکە ئەپڵۆدەکەین
         formData.append('imageData', values.imageSrc);
-        console.log();
-        // setTime({ ...time, sendTime: new Date().getTime() })
-        // console.log("set start time");
         setStartTime(new Date().getTime());
-
-        // axios.get(url).then(function (response) {
-        //     // handle success
-        //     console.log(response);
-        // });
+        // بە پاکێجی ئاکزیۆس فایلەکە ئەپڵۆدەکەین بە مێسۆدی پۆست
         axios({
             method: "post",
-            // url: url,
             url: props.url,
-            // url: + props.url,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
-            // headers: {
-            //   'Accept': 'application/json',
-            //   'Content-Type': 'application/json;charset=UTF-8'
-            // },
-            // headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
             .then(function (response) {
+                //  لەدوای ئەپڵۆد بوونەوە ئەم مێثۆدە ڕەن دەبێت و هەر لێرەد هەژمارەی کاتەکە دەکەین
                 console.log(response.data);
                 setEndTime(new Date().getTime());
             })
             .finally(() => {
                 console.log("set end time");
-                // setTime({ ...time, endTime: new Date().getTime() })
             })
             .catch(function (response) {
                 console.log(response);
-                // setTime({ ...time, endTime: new Date().getTime() })
-
             });
-
-        // console.log(values.imageSrc); //log
-
-
-        // if (validate()) {
-        //     const formData = new FormData()
-        //     formData.append('employeeID', values.employeeID)
-        //     formData.append('employeeName', values.employeeName)
-        //     formData.append('occupation', values.occupation)
-        //     formData.append('imageName', values.imageName)
-        //     formData.append('imageFile', values.imageFile)
-        //     addOrEdit(formData, resetForm)
-        // }
     }
-
+    //  ئەگەر فایلێکی هەڵە هەڵبژێرین ئەم ئیرەرەمان پشانەیات
     const applyErrorClass = field => ((field in errors && errors[field] == false) ? ' invalid-field' : '')
-
-    function handleSetTime(params) {
-        setTime({ ...time, sendTime: new Date().getTime() })
-    }
-
-    function handleEndTime(params) {
-        setTime({ ...time, endTime: new Date().getTime() })
-    }
 
 
     return (
@@ -165,47 +109,36 @@ export default function Uploader(props) {
                 <br />
                 <p className=" fw-bolder">{props.name}</p>
             </div>
+            {/* ئەو فۆڕمەیە بەرپرسە لە ئەپڵۆدەکردنی فایلەکان */}
             <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
                 <div className="card">
-
-                    {/* {values.imageSrc} */}
-                    {/* <img src={values.imageSrc} className="card-img-top" /> */}
-                    {/* <video controls>
-                        <source src="/img/video_2022-01-17_22-17-30.mp4" type="video/mp4"></source>
-                    </video> */}
                     <div className="card-body">
+                        {/* پشاندانی ناو و جۆر و سایزی ئەو فایلەی هەڵمان بژاردووە */}
                         {isFilePicked ? (
                             <>
                                 <p>Filename: {selectedFile.name}</p>
                                 <p>Filetype: {selectedFile.type}</p>
                                 <p>Size in bytes: {selectedFile.size}</p>
-
-
                             </>
                         )
+                            // ئەگەر هیچ فایلێکمان هەڵنەبژاردنبوو دەڵێت فایلێک هەڵبژێرە بۆ پشاندانی وردەکاریەکەی
                             : (
                                 <p>Select a file to show details</p>
                             )
                         }
+
                         <div className="form-group">
+                            {/* بەتن و تیكست بۆکسەکەمان خستووەتە ناو بۆکسێکەوە */}
                             <form className='d-flex'>
-                                {/* <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')} */}
-                                {/* <input type="file" accept='video/mp4' className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')} */}
+                                {/* ئەمە ئەو پارچەیە کە فایل یان رەسم یان هەر شتێکی تری لی ‌‌هەڵەبژێری */}
                                 <input type="file" accept={props.accept} className={"form-control-file form-control form-control-sm" + applyErrorClass('imageSrc')}
                                     onChange={showPreview} id="image-uploader" />
+                                {/* ئەمە ئەو بەتنەیە کە دەسی پیابنێی ئەپڵۆدی ئەکات */}
+                                {/* ئەگەر هیچ شتێک رەسم یان ڤیدیۆ هەڵنەبژێرابوو ئەوە بەتنەکە ئیش ناکا و دیسەیبڵ بووە! */}
                                 <button type="submit" className={isFilePicked ? 'btn btn-secondary btn-sm in' : 'btn btn-secondary btn-sm in disabled'} >Upload</button>
                             </form>
                         </div>
-
-                        {/* <div className="form-group text-center">
-                            <button type="submit" className="btn btn-secondary">Upload</button>
-                        </div> */}
-
-
-                        {/* <h5 class="card-title">Time Calculation</h5> */}
-                        {/* <p class="card-text">All Process Respond Time = </p>
-                        <p class="card-text">Tire - 3 to Tire - 2 = None</p>
-                        <p class="card-text">Tire - 2 to Tire - 1 = {new Date().getTime() - new Date().getTime()}</p> */}
+                        {/* لێرە حیساباتی کاتمان کردووە و لە تەیبڵێک پشانمان داوەتەوە */}
                         <table class="table table-striped table-hover">
                             <caption>Table of Perfonmance</caption>
                             <thead>
@@ -215,33 +148,31 @@ export default function Uploader(props) {
                                 </tr>
                             </thead>
                             <tbody>
+                                {/* کاتی ئەپڵۆدکردنی رەسمەکە لە تیەری یەک بۆ تیەری دوو */}
                                 <tr>
                                     <td>1 {'>'} 2</td>
                                     <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .75).toFixed(3) : 0} seconds</td>
                                 </tr>
+                                {/* کاتی ئەپڵۆدکردنی رەسمەکە یاخود ڤیدیۆکە لە تیەری دوو بۆ سێ */}
                                 <tr>
                                     <td>2 {'>'} 3</td>
                                     <td>{endTime != 0 ? (((endTime - startTime) / 1000) * .25).toFixed(3) : 0} seconds</td>
                                 </tr>
+                                {/* هەموو ئەوکاتەی خایاندوویەتی لە تیەری سی بۆ تیەری یەک */}
                                 <tr>
                                     <td >All RT</td>
                                     <td>{endTime != 0 ? ((endTime - startTime) / 1000).toFixed(3) : 0} seconds</td>
                                 </tr>
+                                {/* بڕی ئەو مێگابایتەی تێپەڕ دەبێت لە هەر سانیەیەکدا کە بە ثروپوت ناومان ناوە*/}
                                 <tr>
                                     <td >Throughput</td>
                                     <td>{endTime != 0 ? (((endTime - startTime) / 1000) / (selectedFile.size / 1000000)).toFixed(3) : 0} MB/s</td>
                                 </tr>
                             </tbody>
                         </table>
-                        {/* <p>throughput: {endTime != 0 ? (((endTime - startTime) / 1000).toFixed(3) / (selectedFile.size / 1000000)) : 0} MB/s</p> */}
-                        {/* {isFilePicked ? selectedFile.size / 1000000 : "wait"} */}
+
                     </div>
                 </div>
-                {/* <p>response time: {endTime != 0 ? (endTime - startTime) / 1000 : 0} seconds</p> */}
-                {/* <br></br>
-                <br></br>
-                <br></br>
-                <br></br> */}
             </form>
         </>
     )
