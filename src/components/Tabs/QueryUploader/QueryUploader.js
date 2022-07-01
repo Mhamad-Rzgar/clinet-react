@@ -14,9 +14,12 @@ export default function QueryUploader(props) {
 
     //  هەڵگرتنی دەیتای ئەو فایلەی بۆمان هاتووەتەوە کە دەتا و ئاتدت و ناوی فایلەکەیە
     const [imageData, setImageData] = useState("");
+    const [imageName, setImageName] = useState("");
 
     // const url = "http://localhost:35220/api/image";
-    const url = "http://localhost:35220/api/SqlServer";
+    // const url = "http://localhost:35220/api/SqlServer";
+    // const url = "http://127.0.0.1:5000/mysql";
+    const url = "http://127.0.0.1:5000/access";
 
     // ناردنی فەرمانی کیوریەکە بە مێثۆدی گێت بۆ تیەری دوو بۆ ڕەنکردنی کیوریەکە و گەڕانەوەی دەیتاکان بۆ تیەری سێ
     const handleRunQuery = e => {
@@ -28,7 +31,9 @@ export default function QueryUploader(props) {
             .then(function (response) {
                 // وەرگرتنەوەی ئایدی فایلەکە لێرە و هەژماری کاتی ڕۆشتن و چوونیشم لێرە کردووە
                 setImageData(response.data[0]["imageId"]);
+                setImageName(response.data[0]["imageName"]);
                 console.log(response.data[0]["imageId"]);
+
                 setEndTime(new Date().getTime());
             })
             .catch(function (error) {
@@ -50,7 +55,9 @@ export default function QueryUploader(props) {
                     {/* پشاندانەوەی ئایدی کۆتا فایک کە هاتووەتەوە، لەبەر نەگونجاوی شوێنەکەی لەجیاتی فایلەکە بەتەنها 
                     ئای دیەکەیمان پشانداوە، بەڵام لەڕاستیدا هەموو شتێکی یەتەوە لە دەیتا و خودی فایەکەو و ناوی فایلەکەش */}
 
-                    <h3>The Retrived Image id is: {imageData}</h3>
+                    <h4>The Retrived Image id is: {imageData}</h4>
+                    <h4>The Retrived Image name is: {imageName}</h4>
+
                 </div>
                 <table class="table">
                     {/* حیساباتی کاتی هاتنەوەی دەیتاکان بە وردی */}

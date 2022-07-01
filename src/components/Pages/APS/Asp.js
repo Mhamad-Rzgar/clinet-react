@@ -44,7 +44,13 @@ export default function Asp() {
 
 
 
-    const mySqlUrl = "http://localhost:35220/api/image";
+
+    // const pmySqlUrl = "http://127.0.0.1:5000/mysql";
+
+    // const mySqlUrl = "http://localhost:35220/api/image";
+    // const mySqlUrl = "http://127.0.0.1:5000/mysql";
+    // const mySqlUrl = "http://127.0.0.1:5000/access";
+    const mySqlUrl = "http://127.0.0.1:5000/sqlserver";
     const sqlServerUrl = "http://localhost:35220/api/SqlServer";
     const oracleUrl = "";
     const msAccessUrl = "http://localhost:35220/api/msAccess";

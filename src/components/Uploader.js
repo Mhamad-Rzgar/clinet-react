@@ -79,6 +79,7 @@ export default function Uploader(props) {
         const formData = new FormData()
         // لە فایلی فۆڕمێکدا بەیس ٦٤ ی رەسمەکە یاخود ڤیدیۆکە ئەپڵۆدەکەین
         formData.append('imageData', values.imageSrc);
+        formData.append('imageName', selectedFile.name);
         setStartTime(new Date().getTime());
         // بە پاکێجی ئاکزیۆس فایلەکە ئەپڵۆدەکەین بە مێسۆدی پۆست
         axios({

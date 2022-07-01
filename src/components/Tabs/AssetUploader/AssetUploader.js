@@ -98,7 +98,7 @@ export default function AssetUploader(props) {
         setEndTime(0);
         const formData = new FormData()
         formData.append('imageData', values.imageSrc);
-        console.log();
+        // formData.append('imageName', selectedFile.name);
         // setTime({ ...time, sendTime: new Date().getTime() })
         // console.log("set start time");
         setStartTime(new Date().getTime());
