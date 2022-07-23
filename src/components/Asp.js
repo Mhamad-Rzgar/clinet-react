@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import './Asp.css';
 import axios from 'axios'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Uploader from '../../Uploader';
-import QueryUploader from '../../Tabs/QueryUploader/QueryUploader';
 
 
-export default function Asp() {
+import Uploader from './Uploader';
+import QueryUploader from './QueryUploader';
+import './Asp.css';
+
+
+export default function Asp(props) {
 
     // 
     const [endTime, setEndTime] = useState(0);
@@ -50,42 +51,14 @@ export default function Asp() {
     // const mySqlUrl = "http://localhost:35220/api/image";
     // const mySqlUrl = "http://127.0.0.1:5000/mysql";
     // const mySqlUrl = "http://127.0.0.1:5000/access";
-    const mySqlUrl = "http://127.0.0.1:5000/sqlserver";
-    const sqlServerUrl = "http://localhost:35220/api/SqlServer";
-    const oracleUrl = "";
-    const msAccessUrl = "http://localhost:35220/api/msAccess";
+    // const mySqlUrl = "http://127.0.0.1:5000/sqlserver";
+    const sqlServerUrl = "http://127.0.0.1:5000/sqlserver";
+    // const sqlServerUrl = "http://localhost:35220/api/SqlServer";
+    // const oracleUrl = "";
+    // const msAccessUrl = "http://localhost:35220/api/msAccess";
 
     return (
         <>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container">
-
-                    {/*  ئەم بەشە ناڤ باڕ و تووڵەکەی سەرەوەی تیایە دەس بنێی
-                     بە هەر کامێکیانا لە کۆتاییا ئەو بەشەت بۆ ئەکرێتەوە */}
-
-                    {/* Toggle button */}
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    {/* Toggle button */}
-
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                        <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <a class="nav-link" href="asp">ASP</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="php">PHP</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="python">PYTHON</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
-
             <br />
             <br />
 
@@ -114,7 +87,7 @@ export default function Asp() {
                                 {/* ئەم کۆمپۆنێنتە کە ناوی ئەپڵۆدەرە ئەپڵۆدی رەسم  ئەکا بۆ مای ئێس کیو ئێڵەکە کە وردە کارییەکەی لە پەیجی خۆیەتی */}
                                 <Uploader
                                     name="Image"
-                                    url={mySqlUrl}
+                                    url={sqlServerUrl}
                                     accept="image/*"
                                 />
                             </div>
@@ -122,7 +95,7 @@ export default function Asp() {
                             <div className='col-6'>
                                 <Uploader
                                     name="Video"
-                                    url={mySqlUrl}
+                                    url={sqlServerUrl}
                                     accept='video/*'
                                 />
                             </div>
@@ -133,14 +106,14 @@ export default function Asp() {
                             <div className='col-6'>
                                 <Uploader
                                     name="All Type of file"
-                                    url={mySqlUrl}
+                                    url={sqlServerUrl}
                                 />
                             </div>
                             <div className='col-6'>
                                 {/* ئەم کۆمپۆنێنتە داونلۆدت کۆتا فایلیان رەسم دەکات کە ئەپڵۆد کراوە بۆ ناو مای ئێس کیو ئێڵەکە و کۆتا ئای دی پشانەیاتەوە */}
                                 <QueryUploader
                                     name="simple Query"
-                                    url={mySqlUrl}
+                                    url={sqlServerUrl}
                                 />
                             </div>
                         </div>
@@ -208,7 +181,7 @@ export default function Asp() {
 
                                 <Uploader
                                     name="Image"
-                                    url={msAccessUrl}
+                                    url={sqlServerUrl}
                                     accept="image/*"
                                 />
                             </div>
@@ -216,7 +189,7 @@ export default function Asp() {
                                 {/* ئەم کۆمپۆنێنتە ئەپڵۆدی ڤیدیۆ ئەکا بۆ ناو ئەکسسەکە */}
                                 <Uploader
                                     name="Video"
-                                    url={msAccessUrl}
+                                    url={sqlServerUrl}
                                     accept='video/*'
                                 />
                             </div>
@@ -227,7 +200,7 @@ export default function Asp() {
                                 {/* ئەم کۆمپۆنێنتە ئەپڵۆدی هەموو جۆرە فایلێک دەکات بۆ ناو ئەکسسەکە */}
                                 <Uploader
                                     name="All Type of file"
-                                    url={msAccessUrl}
+                                    url={sqlServerUrl}
                                 />
                             </div>
                             <div className='col-6'>
@@ -235,7 +208,7 @@ export default function Asp() {
 
                                 <QueryUploader
                                     name="simple Query"
-                                    url={msAccessUrl}
+                                    url={sqlServerUrl}
                                 />
                             </div>
                         </div>

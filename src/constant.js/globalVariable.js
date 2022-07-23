@@ -1,1 +1,0 @@
-const baseUrl = "http://localhost:35220/api/";

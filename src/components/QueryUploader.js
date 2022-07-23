@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Uploader from '../../Uploader';
 
 
 export default function QueryUploader(props) {
@@ -19,7 +18,7 @@ export default function QueryUploader(props) {
     // const url = "http://localhost:35220/api/image";
     // const url = "http://localhost:35220/api/SqlServer";
     // const url = "http://127.0.0.1:5000/mysql";
-    const url = "http://127.0.0.1:5000/access";
+    // const url = "http://127.0.0.1:5000/access";
 
     // ناردنی فەرمانی کیوریەکە بە مێثۆدی گێت بۆ تیەری دوو بۆ ڕەنکردنی کیوریەکە و گەڕانەوەی دەیتاکان بۆ تیەری سێ
     const handleRunQuery = e => {
@@ -33,7 +32,6 @@ export default function QueryUploader(props) {
                 setImageData(response.data[0]["imageId"]);
                 setImageName(response.data[0]["imageName"]);
                 console.log(response.data[0]["imageId"]);
-
                 setEndTime(new Date().getTime());
             })
             .catch(function (error) {

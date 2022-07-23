@@ -73,7 +73,7 @@ export default function Uploader(props) {
 
     // ئەم فەنکشنە ئەوکاتە ڕەنەبی کە دەسەنێین بە ئەپڵۆد و ئەپڵۆد ئەبێت فایلەکان
     const handleFormSubmit = e => {
-        e.preventDefault()
+        // e.preventDefault();
         // هەژماری کاتی ناردن لێرەوە دەکەین
         setEndTime(0);
         const formData = new FormData()
@@ -84,7 +84,8 @@ export default function Uploader(props) {
         // بە پاکێجی ئاکزیۆس فایلەکە ئەپڵۆدەکەین بە مێسۆدی پۆست
         axios({
             method: "post",
-            url: props.url,
+            // url: props.url,
+            url: "http://localhost:5000/api/SqlServer",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         })
